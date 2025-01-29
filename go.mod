@@ -1,4 +1,4 @@
-module github.com/KongAirlines/routes
+module github.com/KongAirlines/destinations
 
 go 1.23.0
 
