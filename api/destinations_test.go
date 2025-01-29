@@ -15,7 +15,7 @@ func TestGetDestinations(t *testing.T) {
 	e := echo.New()
 
 	// Create a new DestinationService
-	destinationService := api.NewDestinationsService()
+	destinationService := api.NewDestinationService()
 
 	// Create a new HTTP request
 	req := httptest.NewRequest(http.MethodGet, "/destinations", nil)
