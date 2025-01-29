@@ -1,7 +1,6 @@
-## Routes API
+## Destinations API
 
-Provides the KongAir routing information including flight origin and destination codes.
-The API also provdes average duration of flight time for each route.
+Provides the KongAir routing information including flight destination airport codes, cities and images.
 
 ### Security
 
@@ -33,25 +32,25 @@ make build
 make run
 ```
 
-In the `Makefile`, the default port is read from the `KONG_AIR_ROUTES_PORT`
+In the `Makefile`, the default port is read from the `KONG_AIR_DESTINATIONS_PORT`
 env var which is loaded via the parent [base.mk](../../base.mk) file.
 
 Alternatively the desired port can be passed to the built server executable directly,
 for example:
 
 ```sh
-./routes <port>
+./destinations <port>
 ```
 
 ### Example client requests
 
-Get all routes:
+Get all destinations:
 ```
-curl -s localhost:8081/routes
+curl -s localhost:8081/destinations
 ```
 
-Get route by route code
+Get destination by airport code
 ```
-curl -s localhost:8081/routes/LHR-SIN
+curl -s localhost:8081/destinations/SIN
 ```
 

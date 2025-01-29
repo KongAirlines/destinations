@@ -1,16 +1,16 @@
-# OpenAPI Spec for the KongAir Routes service
+# OpenAPI Spec for the KongAir Destinations service
 openapi: 3.0.0
 
 info:
-  description: KongAir Routes service provides the registered routes KongAir flies between origin and destination airports.
+  description: KongAir Destinations service provides the registered airport & city destinations KongAir flies tro.
   version: 0.1.0
-  title: Routes Service
+  title: Destionations Service
 
 tags:
   - name: Health
     description: Endpoints for checking the service health
-  - name: Routes
-    description: Endpoints related to KongAir flight routes
+  - name: Destinations
+    description: Endpoints related to KongAir flight destinations
 
 servers:
   - url: https://api.kong-air.com
@@ -54,37 +54,36 @@ paths:
                   value:
                     status: "unhealthy"
 
-  /routes/{id}:
+  /destinations/{id}:
     get:
-      summary: Request a specific KongAir route by id (e.g., LHR-SIN)
-      description: Returns a specific route for a given Route ID.
-      operationId: getRouteById
+      summary: Request a specific KongAir destination by id (e.g., SFO)
+      description: Returns a specific destination for a given Airport ID / Code.
+      operationId: getDestinationById
       tags:
-        - Routes
+        - Destinations
       parameters:
         - name: id
           in: path
-          description: Route id is unique identifier for the route.
+          description: Destination id is unique identifier for the destination airport.
           required: true
           schema:
             type: string
-          example: "LHR-SIN"
+          example: "SIN"
       responses:
         '200':
-          description: Successful response with the found route.
+          description: Successful response with the found destination.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Route'
+                $ref: '#/components/schemas/Destination'
               examples:
-                routeExample:
+                destinationExample:
                   value:
-                    id: "LHR-SIN"
-                    origin: "LHR"
-                    destination: "SIN"
-                    avg_duration: 780
+                    id: "SIN"
+                    city: "Singapore"
+                    image: https://testimages.com/SIN
         '404':
-          description: Route not found.
+          description: Destination not found.
           content:
             application/json:
               schema:
@@ -92,69 +91,62 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: "Route not found"
+                    example: "Destination not found"
               examples:
                 notFoundExample:
                   value:
-                    message: "Route not found."
+                    message: "Destination not found."
 
-  /routes:
+  /destinations:
     get:
-      summary: Request all KongAir routes
-      description: Returns all the routes KongAir is currently registered to fly.
-      operationId: getAllRoutes
+      summary: Request all KongAir destinations
+      description: Returns all the destinations KongAir is currently registered to fly.
+      operationId: getAllDestinations
       tags:
-        - Routes
+        - Destinations
       responses:
         '200':
-          description: Successful response with the registered routes.
+          description: Successful response with the registered destinations.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Route'
+                  $ref: '#/components/schemas/Destination'
               examples:
-                multipleRoutesExample:
+                multipleDestinationsExample:
                   value:
-                    - id: "LHR-SFO"
-                      origin: "LHR"
-                      destination: "SFO"
-                      avg_duration: 660
-                    - id: "LHR-SIN"
-                      origin: "LHR"
-                      destination: "SIN"
-                      avg_duration: 780
+                    - id: "SFO"
+                      airport_code: "SFO"
+                      image: https://testimages.com/SFO
+                    - id: "SIN"
+                      airport_code: "SIN"
+                      image: https://testimages.com/SIN
 
 components:
   schemas:
-    Route:
+    Destination:
       type: object
-      description: Represents a flight route between an origin and a destination airport.
+      description: Represents a destination city & airport.
       properties:
         id:
           type: string
-          description: Unique identifier for the route.
-          example: "LHR-SFO"
-        origin:
-          type: string
-          description: Origin airport code.
-          example: "LHR"
-        destination:
-          type: string
-          description: Destination airport code.
+          description: Unique identifier for the airport.
           example: "SFO"
-        avg_duration:
-          type: integer
-          description: Average flight duration in minutes.
-          example: 660
+        city:
+          type: string
+          description: City name for the destination.
+          example: "San Francisco"
+        image:
+          type: string
+          description: Image link for the destination.
+          example: https://testimages.com/SFO
+       
       required:
         - id
-        - origin
-        - destination
-        - avg_duration
+        - city
+        - image
       example:
-        id: "LHR-SFO"
-        origin: "LHR"
-        destination: "SFO"
-        avg_duration: 660
+        id: "SFO"
+        destination: "San Francisco"
+        image: https://testimages.com/SFO

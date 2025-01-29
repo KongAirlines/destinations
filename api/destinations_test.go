@@ -5,20 +5,20 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/KongAirlines/routes/api"
+	"github.com/KongAirlines/destinations/api"
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetRoutes(t *testing.T) {
+func TestGetDestinations(t *testing.T) {
 	// Create a new Echo instance
 	e := echo.New()
 
-	// Create a new RouteService
-	routeService := api.NewRouteService()
+	// Create a new DestinationService
+	destinationService := api.NewDestinationsService()
 
 	// Create a new HTTP request
-	req := httptest.NewRequest(http.MethodGet, "/routes", nil)
+	req := httptest.NewRequest(http.MethodGet, "/destinations", nil)
 
 	// Create a new HTTP response recorder
 	rec := httptest.NewRecorder()
@@ -26,8 +26,8 @@ func TestGetRoutes(t *testing.T) {
 	// Create an Echo context
 	ctx := e.NewContext(req, rec)
 
-	// Call the GetRoutes function
-	err := routeService.GetAllRoutes(ctx)
+	// Call the GetAllDestinations function
+	err := destinationService.GetAllDestinations(ctx)
 
 	// Assert that no error occurred
 	assert.NoError(t, err)

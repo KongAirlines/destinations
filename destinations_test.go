@@ -4,5 +4,5 @@ import (
 	"testing"
 )
 
-func TestRoutes(t *testing.T) {
+func TestDestinations(t *testing.T) {
 }

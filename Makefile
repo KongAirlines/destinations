@@ -1,6 +1,6 @@
 include base.mk
 
-routes_mkfile_dir := $(CURRDIR)
+destinations_mkfile_dir := $(CURRDIR)
 
 check-dependencies:
 	@$(call check-dependency,go)
@@ -16,16 +16,16 @@ build: check-dependencies
 	@go build .
 
 build-docker:
-	@docker build -t kongair/routes:latest .
+	@docker build -t kongair/destinations:latest .
 
 run: check-dependencies build
-	@./routes ${KONG_AIR_ROUTES_PORT}
+	@./destinations ${KONG_AIR_DESTINATIONS_PORT}
 
 docker: build-docker
-	@docker run -d --name kongair-routes -p ${KONG_AIR_ROUTES_PORT}:${KONG_AIR_ROUTES_PORT} kongair/routes:latest
+	@docker run -d --name kongair-destinations -p ${KONG_AIR_DESTINATIONS_PORT}:${KONG_AIR_DESTINATIONS_PORT} kongair/destinations:latest
 
 kill-docker:
-	-@docker stop kong-air-routes-svc
-	-@docker rm kong-air-routes-svc
+	-@docker stop kong-air-destinations-svc
+	-@docker rm kong-air-destinations-svc
 	@if [ $$? -ne 0 ]; then $(call echo_fail,Failed to kill the docker containers); exit 1; else $(call echo_pass,Killed the docker container); fi
 

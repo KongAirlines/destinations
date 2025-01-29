@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/KongAirlines/routes/api"
+	"github.com/KongAirlines/destinations/api"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -24,7 +24,7 @@ func main() {
 	//	os.Exit(1)
 	//}
 
-	routeService := api.NewRouteService()
+	destinationService := api.NewDestinationService()
 
 	// Echo instance
 	e := echo.New()
@@ -33,7 +33,7 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	api.RegisterHandlers(e, routeService)
+	api.RegisterHandlers(e, destinationService)
 
 	// Start server
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", port)))
