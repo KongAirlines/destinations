@@ -1,0 +1,28 @@
+_defaults:
+  kongctl:
+    namespace: destinations-prod
+
+control_planes:
+  - ref: kongairlines-prod
+    _external:
+      selector:
+        matchFields:
+          name: kongairlines-prod
+
+apis:
+  - ref: destinations-prod-api
+    name: KongAir Destinations
+    description: Production Catalog API owned by the Destinations service team.
+    versions:
+      - ref: destinations-prod-0-1-0
+        version: !file ../openapi/versions/0.1.0.yaml#info.version
+        spec: !file ../openapi/versions/0.1.0.yaml
+    publications:
+      - ref: destinations-prod-publication
+        portal_id: !lookup {name: KongAirlines Production}
+        visibility: public
+    implementations:
+      - ref: destinations-prod-control-plane
+        type: control_plane
+        control_plane:
+          control_plane_id: !ref kongairlines-prod#id
