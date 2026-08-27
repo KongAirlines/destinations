@@ -1,6 +1,6 @@
 _defaults:
   kongctl:
-    namespace: destinations-dev
+    namespace: destinations
 
 control_planes:
   - ref: flight-data-dev
