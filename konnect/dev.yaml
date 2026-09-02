@@ -18,8 +18,9 @@ apis:
   - ref: destinations-dev-api
     name: KongAir Destinations - Development
     description: Development Catalog API owned by the Destinations service team.
+    version: !file ../openapi.yaml#info.version
     versions:
-      - ref: destinations-dev-0-1-0
+      - ref: destinations-dev-current
         version: !file ../openapi.yaml#info.version
         spec: !file ../openapi.yaml
     publications:

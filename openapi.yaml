@@ -3,7 +3,7 @@ openapi: 3.0.0
 
 info:
   description: KongAir Destinations service provides the registered airport & city destinations KongAir flies tro.
-  version: 0.1.0
+  version: 0.2.0-beta.1
   title: Destinations Service
 
 tags:

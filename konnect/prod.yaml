@@ -13,6 +13,7 @@ apis:
   - ref: destinations-prod-api
     name: KongAir Destinations
     description: Production Catalog API owned by the Destinations service team.
+    version: 0.1.0
     versions:
       - ref: destinations-prod-0-1-0
         version: !file ../openapi/versions/0.1.0.yaml#info.version
