@@ -1,0 +1,34 @@
+_defaults:
+  kongctl:
+    namespace: destinations
+
+control_planes:
+  - ref: flight-data-dev
+    _external:
+      selector:
+        matchFields:
+          name: flight-data-dev
+    _deck:
+      files:
+        - ../gateway/dev/kong.yaml
+      flags:
+        - --analytics=false
+
+apis:
+  - ref: destinations-dev-api
+    name: KongAir Destinations - Development
+    description: Development Catalog API owned by the Destinations service team.
+    version: !file ../openapi.yaml#info.version
+    versions:
+      - ref: destinations-dev-current
+        version: !file ../openapi.yaml#info.version
+        spec: !file ../openapi.yaml
+    publications:
+      - ref: destinations-dev-publication
+        portal_id: !lookup {name: KongAirlines Development}
+        visibility: private
+    implementations:
+      - ref: destinations-dev-control-plane
+        type: control_plane
+        control_plane:
+          control_plane_id: !ref flight-data-dev#id
