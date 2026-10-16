@@ -3,12 +3,10 @@ openapi: 3.0.0
 
 info:
   description: KongAir Destinations service provides the registered airport & city destinations KongAir flies tro.
-  version: 0.2.0-beta.1
+  version: 0.2.0-beta.2
   title: Destinations Service
 
 tags:
-  - name: Health
-    description: Endpoints for checking the service health
   - name: Destinations
     description: Endpoints related to KongAir flight destinations
 
@@ -17,43 +15,6 @@ servers:
     description: KongAir API Server
 
 paths:
-  /destinations/health:
-    get:
-      summary: Health check endpoint for Kubernetes
-      description: Endpoint that returns the service health status
-      operationId: getHealthStatus
-      tags:
-        - Health
-      responses:
-        '200':
-          description: Service is healthy.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    example: "OK"
-              examples:
-                healthyExample:
-                  value:
-                    status: "OK"
-        '500':
-          description: Service is unhealthy.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    example: "unhealthy"
-              examples:
-                unhealthyExample:
-                  value:
-                    status: "unhealthy"
-
   /destinations/{id}:
     get:
       summary: Request a specific KongAir destination by id (e.g., SFO)

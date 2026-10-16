@@ -1,0 +1,14 @@
+_defaults:
+  kongctl:
+    namespace: destinations
+
+apis:
+  - ref: destinations-dev-api
+    _external:
+      selector:
+        matchFields:
+          name: KongAir Destinations - Development
+    versions:
+      - ref: destinations-dev-current
+        version: !file ../openapi.yaml#info.version
+        spec: !file ../openapi.yaml
