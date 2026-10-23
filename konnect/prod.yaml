@@ -13,6 +13,8 @@ apis:
   - ref: destinations-prod-api
     name: KongAir Destinations
     description: Production Catalog API owned by the Destinations service team.
+    # Authorize ACE-mapped operation removal during API updates (kongctl >= 1.21).
+    force_delete: true
     version: 0.2.0
     versions:
       - ref: destinations-prod-0-1-0
